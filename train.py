@@ -35,6 +35,6 @@ if __name__ == "__main__":
         maze_path = maze_path.astype(np.int64)
         Y = []
         Y.append(maze_path)
-        Y = np.array(maze_path)
+        Y = np.array(Y)
     test = X
     main()
