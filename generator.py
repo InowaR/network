@@ -10,6 +10,7 @@ while True:
       i += 1
     np.random.shuffle(b)
     with open("constant.txt", "w") as out_X:
+      b = b.astype(np.int64)
       out_X.write(str(b.tolist()))
     maze = b.reshape(10,10)
     os.system('clear')
@@ -59,6 +60,7 @@ while True:
         m = input()
         if m == "y":
             with open("maze_path.txt", "a") as out_Y:
+                replaced = replaced.astype(np.int64)
                 out_Y.write(str(replaced.tolist()) + ", ")
             with open("constant.txt", "r") as constant_X:
                 X = constant_X.read()
