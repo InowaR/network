@@ -9,7 +9,8 @@ while True:
       b[i] += 1
       i += 1
     np.random.shuffle(b)
-    labyrinth = b
+    with open("constant.txt", "w") as out_X:
+      out_X.write(str(b.tolist()))
     maze = b.reshape(10,10)
     os.system('clear')
     print(maze)
@@ -54,13 +55,15 @@ while True:
             if replaced[i] == 2.0:
                 replaced[i] = 1.0
             i += 1
-        print("Save array")
+        print("Save array y/n?")
         m = input()
         if m == "y":
-            with open("maze_path.txt", "a") as output:
-                output.write(str(replaced.tolist()) + ", ")
-            with open("maze.txt", "a") as output:
-                output.write(str(labyrinth.tolist()) + ", ")
+            with open("maze_path.txt", "a") as out_Y:
+                out_Y.write(str(replaced.tolist()) + ", ")
+            with open("constant.txt", "r") as constant_X:
+                X = constant_X.read()
+            with open("maze.txt", "a") as out_X:
+                out_X.write(str(X + ", "))
             continue
         if m == "n":
             continue
@@ -68,10 +71,3 @@ while True:
 
   except IndexError:
     os.system('clear')
-
-
-
-
-
-
-
