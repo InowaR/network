@@ -3,7 +3,7 @@ import numpy as np
 def train(X, Y):
   w1 = np.random.random((100,10))
   w2 = np.random.random((10,100))
-  for i in range(100):
+  for i in range(1000):
     S1 = 1 / (1 + np.exp(-(np.dot(X, w1))))
     S2 = 1 / (1 + np.exp(-(np.dot(S1, w2))))
     S2_delta = (Y - S2) * (S2 * (1 - S2))
