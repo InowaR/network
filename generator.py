@@ -9,8 +9,8 @@ while True:
       b[i] += 1
       i += 1
     np.random.shuffle(b)
-    with open("constant.npy", "wb") as out:
-      np.save(out, b)
+    with open("constant.txt", mode = "w") as out:
+      out.write(str(b.tolist()))
     maze = b.reshape(10,10)
     os.system('clear')
     print(maze)
@@ -58,12 +58,12 @@ while True:
         print("Save array y/n?")
         m = input()
         if m == "y":
-            with open("maze_path.npy", "ab") as out_Y:
-              np.save(out_Y, replaced)
-            with open("constant.npy", "rb") as constant_X:
-              X = np.load(constant_X)
-              with open("maze.npy", "ab") as out_X:
-                np.save(out_X, X)
+            with open("maze_path.txt", "a") as out_Y:
+              out_Y.write(str(replaced.tolist()) + ", ")
+            with open("constant.txt", "r") as constant_X:
+              X = constant_X.read()
+              with open("maze.txt", "a") as out_X:
+                out_X.write(X + ", ")
             continue
         if m == "n":
             continue
