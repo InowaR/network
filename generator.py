@@ -1,5 +1,6 @@
 import numpy as np
 import os
+import pickle
 
 while True:
   try:
@@ -9,8 +10,9 @@ while True:
       b[i] += 1
       i += 1
     np.random.shuffle(b)
-    with open("constant.npy", "wb") as out:
-      np.save(out, b)
+    with open('constant.txt', 'wb') as out:
+      pickle.dump(b, out)
+      
     maze = b.reshape(10,10)
     os.system('clear')
     print(maze)
@@ -58,12 +60,13 @@ while True:
         print("Save array y/n?")
         m = input()
         if m == "y":
-            with open("maze_path.npy", "ab") as out_Y:
-              np.save(out_Y, replaced)
-            with open("constant.npy", "rb") as constant_X:
-              X = np.load(constant_X)
-              with open("maze.npy", "ab") as out_X:
-                np.save(out_X, X)
+          with open('maze_path.txt', 'ab') as out_Y:
+            pickle.dump(replaced, out_Y)
+          with open('constant.txt', 'rb') as constant_X:
+            X = pickle.load(constant_X)
+          with open('maze.txt', 'ab') as out_X:
+            pickle.dump(X, out_X)
+
             continue
         if m == "n":
             continue
