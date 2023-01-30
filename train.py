@@ -2,9 +2,10 @@ import numpy as np
 import pickle
 
 def train(X, Y):
-  w1 = np.random.random((100,5))
-  w2 = np.random.random((5,100))
-  for i in range(1000):
+  learning_rate = 0.99
+  w1 = np.random.random((100,10))
+  w2 = np.random.random((10,100))
+  for i in range(10000):
     temp = list(zip(X, Y))
     np.random.shuffle(temp)
     X, Y = zip(*temp)
@@ -14,8 +15,8 @@ def train(X, Y):
     S2 = 1 / (1 + np.exp(-(np.dot(S1, w2))))
     S2_delta = (Y - S2) * (S2 * (1 - S2))
     S1_delta = S2_delta.dot(w2.T) * (S1 * (1 - S1))
-    w1 += X.T.dot(S1_delta)
-    w2 += S1.T.dot(S2_delta)
+    w1 += learning_rate * (X.T.dot(S1_delta))
+    w2 += learning_rate * (S1.T.dot(S2_delta))
   return w1, w2
 
 def predict(test, w1, w2):
