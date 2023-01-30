@@ -2,9 +2,14 @@ import numpy as np
 import pickle
 
 def train(X, Y):
-  w1 = np.random.random((100,3))
-  w2 = np.random.random((3,100))
-  for i in range(100):
+  w1 = np.random.random((100,5))
+  w2 = np.random.random((5,100))
+  for i in range(1000):
+    temp = list(zip(X, Y))
+    np.random.shuffle(temp)
+    X, Y = zip(*temp)
+    X = np.array(X)
+    Y = np.array(Y)
     S1 = 1 / (1 + np.exp(-(np.dot(X, w1))))
     S2 = 1 / (1 + np.exp(-(np.dot(S1, w2))))
     S2_delta = (Y - S2) * (S2 * (1 - S2))
@@ -33,8 +38,6 @@ if __name__ == "__main__":
           except EOFError:
               break
   Y = np.array(Y)
-
-
   with open('constant.txt', 'rb') as constant_X:
       test = []
       while True:
@@ -43,8 +46,6 @@ if __name__ == "__main__":
           except EOFError:
               break
   test = np.array(test)
-
-
   with open('maze.txt', 'rb') as out_X:
       X = []
       while True:
